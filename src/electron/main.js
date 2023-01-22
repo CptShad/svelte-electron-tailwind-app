@@ -14,21 +14,26 @@ function main() {
 		}
 	});
 
-	mainWindow.loadFile(path.join(__dirname, "../public/index.html"));
-
-	if (isDev) mainWindow.webContents.openDevTools();
-
-	app.on('activate', function () {
-		// On macOS it's common to re-create a window in the app when the
-		// dock icon is clicked and there are no other windows open.
-		if (BrowserWindow.getAllWindows().length === 0) 
-			createWindow();
-	});
+	if (process.env.NODE_ENV !== 'development') {
+        // Load production build
+        mainWindow.loadFile(`${__dirname}/renderer/dist/index.html`)
+      } else {
+        // Load vite dev server page 
+        console.log('Development mode')
+        mainWindow.loadURL('http://localhost:8000/')
+      }
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.whenReady().then(main);
+
+app.on('activate', function () {
+    // On macOS it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (BrowserWindow.getAllWindows().length === 0) 
+    main();
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
