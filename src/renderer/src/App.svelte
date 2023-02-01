@@ -1,59 +1,22 @@
 <script>
-	import svelteLogo from "./assets/svelte.svg";
-	import Counter from "./lib/Counter.svelte";
+	import Router, {location, link} from 'svelte-spa-router';
+	import Home from "./routes/Home.svelte";
+	import Navbar from "./routes/Navbar.svelte";
+	import Store from "./routes/store/Store.svelte";
+	import Match from "./routes/match/CurrentMatchPlayers.svelte"
 </script>
 
-<main>
-	<div class="flex flex-row justify-center">
-		<a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-			<img src="/vite.svg" class="logo" alt="Vite Logo" />
-		</a>
-		<a href="https://svelte.dev" target="_blank" rel="noreferrer">
-			<img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-		</a>
-		<a href="https://tailwindcss.com/" target="_blank" rel="noreferrer">
-			<img
-				src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/600px-Tailwind_CSS_Logo.svg.png?20211001194333"
-				class="logo tailwind"
-				alt="Tailwind Logo"
-			/>
-		</a>
+<body class="h-screen bg-gray-800">
+	<div class="grid grid-cols-5">
+		<div class="col-span-1">
+			<Navbar />
+		</div>
+		<div class="col-span-4">
+			<Router routes={{
+				'/': Home,
+				'/store': Store,
+				'/match': Match
+			}} />
+		</div>
 	</div>
-	<h1>Vite + Svelte + Tailwind</h1>
-
-	<div class="card">
-		<Counter />
-	</div>
-
-	<p>
-		Check out <a
-			href="https://github.com/sveltejs/kit#readme"
-			target="_blank"
-			rel="noreferrer">SvelteKit</a
-		>, the official Svelte app framework powered by Vite!
-	</p>
-
-	<p class="read-the-docs">
-		Click on the Vite and Svelte logos to learn more
-	</p>
-</main>
-
-<style>
-	.logo {
-		height: 6em;
-		padding: 1.5em;
-		will-change: filter;
-	}
-	.logo:hover {
-		filter: drop-shadow(0 0 2em #646cffaa);
-	}
-	.logo.svelte:hover {
-		filter: drop-shadow(0 0 2em #ff3e00aa);
-	}
-	.logo.tailwind:hover {
-		filter: drop-shadow(0 0 1.5em #0099ffaa);
-	}
-	.read-the-docs {
-		color: #888;
-	}
-</style>
+</body>

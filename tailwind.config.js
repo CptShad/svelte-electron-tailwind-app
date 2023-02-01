@@ -4,7 +4,12 @@ module.exports = {
     "./src/renderer/src/**/*.{html,js,svelte,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'nunito': ['nunito', 'sans-serif'],
+        'poppins': ['poppins'],
+      },
+    },
   },
   plugins: [],
 }
